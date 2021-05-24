@@ -5,6 +5,8 @@
   <%= f.text_field :search %>
   <%= f.submit "Search" %>
 <% end %>
+<br>
+<%= link_to "Fill out an application", "applications/new" %>
 
 
 <% @pets.each do |pet| %>
@@ -18,4 +20,3 @@
 <% end %>
 <br>
 <br>
-<%= link_to "Fill out an application", "applications/new" %>

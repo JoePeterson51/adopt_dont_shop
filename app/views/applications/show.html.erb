@@ -1,8 +1,31 @@
 
-  <h3>Name: <%= @application.name %></h3>
-  Address
-  <p><%= @application.street_address %></p>
-  <p><%= @application.city %>, <%= @application.state %>, <%= @application.zip_code %></p>
-  <p>Reasons for a good home: <%= @application.applicant_qualitys %></p>
-  <p>Pets names: <%= @application.pet_names %></p>
-  <p>application status: <%= @application.application_status %></p>
+<h3>Name: <%= @application.name %></h3>
+<p>application status: <%= @application.application_status %></p>
+Address
+<p><%= @application.street_address %></p>
+<p><%= @application.city %>, <%= @application.state %>, <%= @application.zip_code %></p>
+<p>Reasons for a good home: <%= @application.applicant_qualitys %></p>
+<p>Pets names: <%= @app %></p>
+
+<%= @application.pets.each do |pet| %>
+  <%= link_to "#{pet.name}", "/pets/#{pet.id}" %>
+  <br>
+<% end %>
+
+<%= form_with url: "/applications/#{@application.id}", method: :get, local: true do |f| %>
+  <h4><%= f.label :search %></h4>
+  <%= f.text_field :search %>
+  <%= f.submit "Search" %>
+<% end %>
+
+<% @pets.each do |pet| %>
+  <h3><%= pet.name %></h3>
+  <p>Age: <%= pet.age %></p>
+  <p>Breed: <%= pet.breed %></p>
+  <p>Adoptable: </p>
+  <p>You can find <%= pet.name %> at <%= pet.shelter_name %>!</p>
+  <%= form_with url: "/applications/#{@application.id}", method: :patch, local: true do |f| %>
+    <%= f.hidden_field :pet_id, :value => "#{pet.id}" %>
+    <%= f.submit "Add pet to application" %>
+  <% end %>
+<% end %>
