@@ -11,8 +11,21 @@ class ApplicationsController < ApplicationController
     redirect_to "/applications/#{application.id}"
   end
 
+  def update
+    application = Application.find(params[:id])
+    pet = Pet.find(params[:pet_id])
+    application.add_pet(application, pet)
+    redirect_to "/applications/#{application.id}"
+  end
+
   def show
-    @application = Application.find(params[:id])
+    if params[:search].present?
+      @application = Application.find(params[:id])
+      @pets = Pet.search(params[:search])
+    else
+      @application = Application.find(params[:id])
+      @pets = []
+    end
   end
 
 private
