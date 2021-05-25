@@ -11,11 +11,6 @@
   </head>
 
   <body>
-    <% flash.each do |type, msg| %>
-      <div>
-        <%= msg %>
-      </div>
-    <% end %>
     <section>
       <p><%= link_to "Application", "/applications" %></p>
       <p><%= link_to "Pets", "/pets" %></p>
@@ -23,6 +18,11 @@
       <p><%= link_to "Veterinarians", "/veterinarians" %></p>
       <p><%= link_to "Veterinary Offices", "/veterinary_offices" %></p>
     </section>
+    <% flash.each do |type, msg| %>
+      <div>
+        <%= msg %>
+      </div>
+    <% end %>
     <%= yield %>
   </body>
 </html>
