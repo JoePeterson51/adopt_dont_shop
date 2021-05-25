@@ -58,6 +58,15 @@ RSpec.describe Application do
       expect(page).to_not have_content("Why I would make a good owner for these pet(s)?")
       expect(page).to_not have_content("Search")
     end
+
+    it 'shows partial matches for pet search' do
+      visit "applications/#{@application.id}"
+      expect(page).to_not have_content("Sparky")
+      fill_in 'search', with: "Spa"
+      click_button "Search"
+
+      expect(page).to have_content("Sparky")
+    end
   end
 end
 

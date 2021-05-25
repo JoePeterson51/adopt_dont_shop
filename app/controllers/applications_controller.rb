@@ -7,8 +7,13 @@ class ApplicationsController < ApplicationController
   end
 
   def create
-    application = Application.create!(application_params)
-    redirect_to "/applications/#{application.id}"
+    application = Application.new(application_params)
+    if application.save
+      redirect_to "/applications/#{application.id}"
+    else
+      flash[:alert] = "Must Fill out all fields"
+      render :new
+    end
   end
 
   def update
@@ -27,7 +32,7 @@ class ApplicationsController < ApplicationController
   def show
     if params[:search].present?
       @application = Application.find(params[:id])
-      @pets = Pet.search(params[:search])
+      @pets = Pet.partial_search(params)
     else
       @application = Application.find(params[:id])
       @pets = []
