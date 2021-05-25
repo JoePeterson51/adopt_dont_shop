@@ -14,6 +14,9 @@ class Pet < ApplicationRecord
   end
 
   def self.partial_search(params)
-    where("name LIKE ?", "%#{params[:search]}%")
+    where(self.arel_table[:name]
+      .lower
+      .matches("%#{params[:search].downcase}%")
+    )
   end
 end

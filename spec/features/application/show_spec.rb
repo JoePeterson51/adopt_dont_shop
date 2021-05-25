@@ -67,6 +67,15 @@ RSpec.describe Application do
 
       expect(page).to have_content("Sparky")
     end
+
+     it 'pet search is case insensitive' do
+      visit "applications/#{@application.id}"
+      expect(page).to_not have_content("Sparky")
+      fill_in 'search', with: "sparky"
+      click_button "Search"
+
+      expect(page).to have_content("Sparky")
+    end
   end
 end
 
