@@ -21,13 +21,13 @@ RSpec.describe Application do
       expect(page).to have_content('In Progress')
     end
 
-    xit 'requires all fields to be filled out' do
+    it 'requires all fields to be filled out' do
       visit '/pets'
       click_link 'Fill out an application'
       fill_in('Name', with: 'John')
       click_button('Submit')
 
-      expect(current_path).to eq('/applications/new')
+      expect(current_path).to eq('/applications/')
     end
   end
 end
