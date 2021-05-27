@@ -48,6 +48,15 @@ RSpec.describe Shelter, type: :model do
         expect(Shelter.order_by_reverse_alpha.last).to eq(@shelter_1)
       end
     end
+
+    describe '#shelters_with_pending_applications' do
+      it 'finds all shelters with pending applications' do
+        application_1 = Application.create!(name: 'Jim', street_address: '123 Car dr.', city: 'Denver', state: 'CO', zip_code: 22222, application_status: 'Pending')
+        application_1.pets << @pet_1
+
+        expect(Shelter.shelters_with_pending_applications.first).to eq(@shelter_1)
+      end
+    end
   end
 
   describe 'instance methods' do

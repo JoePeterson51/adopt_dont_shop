@@ -5,3 +5,12 @@
   <br>
   <br>
 <% end %>
+
+<section id = 'pending-apps'>
+  <h2>Shelters with pending applications</h2>
+  <% @pending_shelters.each do |shelter| %>
+    <%= shelter.name %>
+    <br>
+    <br>
+  <% end %>
+</section>

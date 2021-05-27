@@ -10,6 +10,7 @@ class ApplicationsController < ApplicationController
     application = Application.new(application_params)
     if application.save
       redirect_to "/applications/#{application.id}"
+      application.update(application_status: "In Progress")
     else
       flash[:alert] = "Must Fill out all fields"
       render :new
@@ -24,7 +25,7 @@ class ApplicationsController < ApplicationController
       redirect_to "/applications/#{application.id}"
     end
     if params[:qualities].present?
-      application.update(application_params)
+      application.update(application_params.merge(application_status: "Pending"))
       redirect_to "/applications/#{application.id}"
     end
   end
@@ -41,6 +42,6 @@ class ApplicationsController < ApplicationController
 
 private
   def application_params
-    params.permit(:name, :street_address, :city, :state, :zip_code, :applicant_qualitys, :pet_names, :application_status)
+    params.permit(:name, :street_address, :city, :state, :zip_code, :applicant_qualitys, :pet_names)
   end
 end
