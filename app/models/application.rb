@@ -14,4 +14,12 @@ class Application < ApplicationRecord
       application.pets << pet
     end
   end
+
+  def submitable?
+    !self.pets.empty? && self.application_status == "In Progress"
+  end
+
+  def searchable?
+    self.application_status == "In Progress"
+  end
 end
