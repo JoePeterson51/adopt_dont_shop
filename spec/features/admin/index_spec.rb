@@ -9,7 +9,7 @@ RSpec.describe Admin do
 
       visit '/admin/shelters'
 
-      expect(page).to have_content("Adopt em all!")
+      expect(page).to have_content('Adopt em all!')
       expect(page).to have_content("Dogs Dogs Dogs")
       expect(page).to have_content("Cats Cats Cats")
     end
